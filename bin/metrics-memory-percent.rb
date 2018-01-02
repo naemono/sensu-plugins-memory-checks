@@ -70,6 +70,7 @@ class MemoryGraphite < Sensu::Plugin::Metric::CLI::Graphite
       mem['usedWOBuffersCaches'] = mem['total'] - mem['available']
       mem['freeWOBuffersCaches'] = mem['available']
     else
+      mem['buffers'] = 0 if !mem.has_key?('buffers')
       mem['usedWOBuffersCaches'] = mem['used'] - (mem['buffers'] + mem['cached'])
       mem['freeWOBuffersCaches'] = mem['free'] + (mem['buffers'] + mem['cached'])
     end
